@@ -33,6 +33,9 @@ export default function Blog() {
               </header>
               <figure className="mb-4">
                 <Image
+width={900}
+height={400}
+                  // layout="fixed"
                   className="img-fluid rounded"
                   src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
                   alt="..."
@@ -75,9 +78,8 @@ export default function Blog() {
                 </p>
               </section>
             </article>
-            
           </div>
-          
+
           <SideWidget />
         </div>
       </div>

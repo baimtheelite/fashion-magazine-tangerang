@@ -7,6 +7,9 @@ export default function BlogFeatured() {
     <div className="card mb-4">
       <a href="#!">
         <Image
+        width={850}
+        height={350}
+          // layout="fixed"
           className="card-img-top"
           src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
           alt="..."

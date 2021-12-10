@@ -15,6 +15,9 @@ export default function CommentSection() {
           <div className="d-flex mb-4">
             <div className="flex-shrink-0">
               <Image
+width={900}
+height={400}
+                // layout="fixed"
                 className="rounded-circle"
                 src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                 alt="..."
@@ -28,6 +31,9 @@ export default function CommentSection() {
               <div className="d-flex mt-4">
                 <div className="flex-shrink-0">
                   <Image
+width={900}
+height={400}
+                    // layout="fixed"
                     className="rounded-circle"
                     src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                     alt="..."
@@ -43,6 +49,9 @@ export default function CommentSection() {
               <div className="d-flex mt-4">
                 <div className="flex-shrink-0">
                   <Image
+width={900}
+height={400}
+                    // layout="fixed"
                     className="rounded-circle"
                     src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                     alt="..."
@@ -59,6 +68,9 @@ export default function CommentSection() {
           <div className="d-flex">
             <div className="flex-shrink-0">
               <Image
+width={900}
+height={400}
+                // layout="fixed"
                 className="rounded-circle"
                 src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
                 alt="..."

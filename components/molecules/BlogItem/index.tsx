@@ -7,6 +7,9 @@ export default function BlogItem() {
     <div className="card mb-4">
       <a href="#!">
         <Image
+width={900}
+height={400}
+          // layout="fixed"
           className="card-img-top"
           src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
           alt="..."
