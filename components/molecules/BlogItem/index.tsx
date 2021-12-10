@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -5,7 +6,7 @@ export default function BlogItem() {
   return (
     <div className="card mb-4">
       <a href="#!">
-        <img
+        <Image
           className="card-img-top"
           src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
           alt="..."
