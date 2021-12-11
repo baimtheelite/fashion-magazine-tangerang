@@ -15,11 +15,12 @@ const Home: NextPage = () => {
   const [article, setArticle] = useState([]);
   const getArticleList = useCallback(async () => {
     const data = await getArticle();
-  }, [])
-  
+    console.log(data);
+    setArticle(data.data);
+  }, []);
+
   useEffect(() => {
     getArticleList();
-    console.log(process.env.NEXT_PUBLIC_API);
   }, []);
   return (
     <>
@@ -31,10 +32,12 @@ const Home: NextPage = () => {
           <div className="col-lg-8">
             {/* <BlogFeatured />
             <BlogFeatured /> */}
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
+            {/* {article.map(item => (
+              <BlogItem />
+            ))} */}
+            <BlogItem cover="image/" id={123} metaDescription="asdadsad" publish_date="2021-02-02" key={123} title="asdasd" slug="asdasd-asdad" />
+            <BlogItem cover="image/" id={123} metaDescription="asdadsad" publish_date="2021-02-02" key={123} title="asdasd" slug="asdasd-asdad" />
+            <BlogItem cover="image/" id={123} metaDescription="asdadsad" publish_date="2021-02-02" key={123} title="asdasd" slug="asdasd-asdad" />
           </div>
           <SideWidget />
         </div>

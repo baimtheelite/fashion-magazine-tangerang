@@ -1,31 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { ArticleTypes } from "../../../services/data-types";
 
-export default function BlogItem() {
+const IMG = process.env.NEXT_PUBLIC_IMAGE;
+
+export default function BlogItem(props: ArticleTypes) {
+  const {title, metaDescription, cover, publish_date, slug} = props;
   return (
     <div className="card mb-4">
       <a href="#!">
         <Image
-width={900}
-height={400}
+          width={900}
+          height={400}
           // layout="fixed"
           className="card-img-top"
-          src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
+          src={`${IMG}/${cover}`}
           alt="..."
         />
       </a>
       <div className="card-body">
-        <div className="small text-muted">January 1, 2021</div>
-        <h2 className="card-title h4">Post Title</h2>
+        <div className="small text-muted">{publish_date}</div>
+        <h2 className="card-title h4">{title}</h2>
         <p className="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-          aliquid atque, nulla.
+          {metaDescription}
         </p>
-        <Link href="/blog/test">
-          <a className="btn btn-primary">
-            Read more →
-          </a>
+        <Link href={`/blog/${slug}`}>
+          <a className="btn btn-primary">Read more →</a>
         </Link>
       </div>
     </div>

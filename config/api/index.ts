@@ -13,7 +13,8 @@ export default async function callAPI({
   token,
   serverToken,
 }: CallAPIProps) {
-  let headers = {};
+  let headers = {
+  };
 
   if (serverToken) {
     headers = {
@@ -49,7 +50,7 @@ export default async function callAPI({
   const res = {
     error: false,
     message: "success",
-    data: response
+    data: response.data.data,
   };
 
   return res;
