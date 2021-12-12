@@ -56,22 +56,22 @@ export default function Blog() {
   return (
     <>
       <Head>
-        <title>{isLoading ? articleDetail.title : "Artikel Detail"}</title>
+        <title>{articleDetail.title}</title>
         {/* Meta */}
-        <meta name="description" content={isLoading ? articleDetail.title : "Artikel Detail"} />
-        <meta name="keywords" content={isLoading ? articleDetail.meta_keywords : "Artikel Detail"} />
+        <meta name="description" content={articleDetail.title} />
+        <meta name="keywords" content={articleDetail.meta_keywords} />
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={basePath} />
-        <meta property="og:title" content={isLoading ? articleDetail.title : "Artikel Detail"} />
-        <meta property="og:description" content={isLoading ? articleDetail.meta_description : "Artikel Detail"} />
-        <meta property="og:image" content={isLoading ? `${IMG}/${articleDetail.cover}` : ''} />
+        <meta property="og:title" content={articleDetail.title} />
+        <meta property="og:description" content={articleDetail.meta_description} />
+        <meta property="og:image" content={`${IMG}/${articleDetail.cover}`} />
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={basePath} />
-        <meta property="twitter:title" content={isLoading ? articleDetail.title : "Artikel Detail"} />
-        <meta property="twitter:description" content={isLoading ? articleDetail.meta_description : "Artikel Detail"} />
-        <meta property="twitter:image" content={isLoading ? `${IMG}/${articleDetail.cover}` : ''} />
+        <meta property="twitter:title" content={articleDetail.title} />
+        <meta property="twitter:description" content={articleDetail.meta_description} />
+        <meta property="twitter:image" content={`${IMG}/${articleDetail.cover}`} />
       </Head>
       <Navbar />
       
