@@ -13,60 +13,30 @@ import { ArticleDetailTypes } from "../../services/data-types";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export default function Blog() {
+export default function Blog(props) {
   // const {title, content, cover, publish_date, slug} = props;
+  const { articleDetail } = props;
+  console.log(articleDetail);
+
   const IMG = process.env.NEXT_PUBLIC_IMAGE;
 
   const { query, isReady, basePath } = useRouter();
 
   const [isLoading, setIsLoading] = useState(true);
 
-
-  const [articleDetail, setArticleDetail] = useState({
-    title: "",
-    content: "",
-    cover: "",
-    publish_date: "",
-    slug: "",
-    meta_keywords: "",
-    meta_description: "",
-    author: {
-      id: "",
-      name: "",
-    },
-  });
-
-  const getArticleDetailAPI = useCallback(async (slug) => {
-    const data = await getArticleDetail(slug);
-    console.log(data);
-
-    setArticleDetail(data.data);
-    setIsLoading(false);
-  }, []);
-
-
-  useEffect(() => {
-    if (isReady) {
-      console.log(query.slug);
-
-      getArticleDetailAPI(query.slug);
-    }
-  }, [isReady]);
-
   return (
     <>
       <Head>
-        <title>{articleDetail.title}</title>
-        {/* Meta */}
-        <meta name="description" content={articleDetail.title} />
+        <title>{articleDetail.title} - Fashion Magazine Tangerang</title>
+        <meta name="description" content={articleDetail.meta_description} />
         <meta name="keywords" content={articleDetail.meta_keywords} />
-        {/* Open Graph / Facebook */}
+
         <meta property="og:type" content="website" />
         <meta property="og:url" content={basePath} />
         <meta property="og:title" content={articleDetail.title} />
         <meta property="og:description" content={articleDetail.meta_description} />
         <meta property="og:image" content={`${IMG}/${articleDetail.cover}`} />
-        {/* Twitter */}
+
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={basePath} />
         <meta property="twitter:title" content={articleDetail.title} />
@@ -74,8 +44,8 @@ export default function Blog() {
         <meta property="twitter:image" content={`${IMG}/${articleDetail.cover}`} />
       </Head>
       <Navbar />
-      
-      {isLoading && (
+
+      {/* {isLoading && (
         <div className="container">
           <div className="text-center">
             <Skeleton className="my-3" width={500} height={50} />
@@ -84,9 +54,9 @@ export default function Blog() {
             <Skeleton className="my-3" count={5} />
           </div>
         </div>
-      )}
+      )} */}
 
-      {!isLoading && (
+      {isLoading && (
         <>
           <div className="container mt-5">
             <div className="row">
@@ -103,28 +73,13 @@ export default function Blog() {
                       />{" "}
                       by {articleDetail.author.name}
                     </div>
-                    {/* <a
-            className="badge bg-secondary text-decoration-none link-light"
-            href="#!"
-          >
-            Web Design
-          </a>
-          <a
-            className="badge bg-secondary text-decoration-none link-light"
-            href="#!"
-          >
-            Freebies
-          </a> */}
                   </header>
                   <figure className="mb-4 text-center">
                     <Image
                       width={900}
                       height={400}
-                      // layout="fixed"
                       className="img-fluid rounded"
                       src={`${IMG}/${articleDetail.cover}`}
-                      // src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-
                       alt={articleDetail.title}
                     />
                   </figure>
@@ -137,8 +92,6 @@ export default function Blog() {
                   </section>
                 </article>
               </div>
-
-              {/* <SideWidget /> */}
             </div>
           </div>
         </>
@@ -146,4 +99,27 @@ export default function Blog() {
       <Footer />
     </>
   );
+}
+
+interface getServerSideProps {
+  req: {
+    cookies: {
+      token: string;
+    };
+  };
+  params: {
+    slug: string;
+  };
+}
+
+export async function getServerSideProps({ req, params }: getServerSideProps) {
+  const { slug } = params;
+
+  const response = await getArticleDetail(slug);
+
+  return {
+    props: {
+      articleDetail: response.data,
+    },
+  };
 }
