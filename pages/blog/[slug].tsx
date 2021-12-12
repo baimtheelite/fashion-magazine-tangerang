@@ -1,88 +1,126 @@
+import { log } from "console";
+import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import Moment from "react-moment";
 import Footer from "../../components/organisms/Footer";
 import Header from "../../components/organisms/Header";
 import Navbar from "../../components/organisms/Navbar";
 import SideWidget from "../../components/organisms/SideWidget";
+import { getArticleDetail } from "../../services/article";
+import { ArticleDetailTypes } from "../../services/data-types";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Blog() {
+  // const {title, content, cover, publish_date, slug} = props;
+  const IMG = process.env.NEXT_PUBLIC_IMAGE;
+
+  const { query, isReady } = useRouter();
+
+  const [articleDetail, setArticleDetail] = useState({
+    title: "",
+    content: "",
+    cover: "",
+    publish_date: "",
+    slug: "",
+    author: {
+      id: "",
+      name: "",
+    },
+  });
+
+  const getArticleDetailAPI = useCallback(async (slug) => {
+    const data = await getArticleDetail(slug);
+    console.log(data);
+
+    setArticleDetail(data.data);
+  }, []);
+
+  useEffect(() => {
+    if (isReady) {
+      console.log(query.slug);
+
+      getArticleDetailAPI(query.slug);
+    }
+  }, [isReady]);
+
   return (
     <>
+      <Head>
+        <title>{isReady ? articleDetail.title : "Artikel Detail"}</title>
+      </Head>
       <Navbar />
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-lg-8">
-            <article>
-              <header className="mb-4">
-                <h1 className="fw-bolder mb-1">Welcome to Blog Post!</h1>
-                <div className="text-muted fst-italic mb-2">
-                  Posted on January 1, 2021 by Start Bootstrap
-                </div>
-                <a
-                  className="badge bg-secondary text-decoration-none link-light"
-                  href="#!"
-                >
-                  Web Design
-                </a>
-                <a
-                  className="badge bg-secondary text-decoration-none link-light"
-                  href="#!"
-                >
-                  Freebies
-                </a>
-              </header>
-              <figure className="mb-4">
-                <Image
-width={900}
-height={400}
-                  // layout="fixed"
-                  className="img-fluid rounded"
-                  src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-                  alt="..."
-                />
-              </figure>
-              <section className="mb-5">
-                <p className="fs-5 mb-4">
-                  Science is an enterprise that should be cherished as an
-                  activity of the free human mind. Because it transforms who we
-                  are, how we live, and it gives us an understanding of our
-                  place in the universe.
-                </p>
-                <p className="fs-5 mb-4">
-                  The universe is large and old, and the ingredients for life as
-                  we know it are everywhere, so there's no reason to think that
-                  Earth would be unique in that regard. Whether of not the life
-                  became intelligent is a different question, and we'll see if
-                  we find that.
-                </p>
-                <p className="fs-5 mb-4">
-                  If you get asteroids about a kilometer in size, those are
-                  large enough and carry enough energy into our system to
-                  disrupt transportation, communication, the food chains, and
-                  that can be a really bad day on Earth.
-                </p>
-                <h2 className="fw-bolder mb-4 mt-5">
-                  I have odd cosmic thoughts every day
-                </h2>
-                <p className="fs-5 mb-4">
-                  For me, the most fascinating interface is Twitter. I have odd
-                  cosmic thoughts every day and I realized I could hold them to
-                  myself or share them with people who might be interested.
-                </p>
-                <p className="fs-5 mb-4">
-                  Venus has a runaway greenhouse effect. I kind of want to know
-                  what happened there because we're twirling knobs here on Earth
-                  without knowing the consequences of it. Mars once had running
-                  water. It's bone dry today. Something bad happened there as
-                  well.
-                </p>
-              </section>
-            </article>
+      
+      {!isReady && (
+        <div className="container">
+          <div className="text-center">
+            <Skeleton className="my-3" width={500} height={50} />
+            <Skeleton count={1} width={400} />
+            <Skeleton count={1} width={900} height={400} />
+            <Skeleton className="my-3" count={5} />
           </div>
-
-          <SideWidget />
         </div>
-      </div>
+      )}
+
+      {isReady && (
+        <>
+          <div className="container mt-5">
+            <div className="row">
+              <div className="col-lg-12">
+                <article>
+                  <header className="mb-4 text-center">
+                    <h1 className="fw-bolder mb-1">{articleDetail.title}</h1>
+                    <div className="text-muted fst-italic mb-2">
+                      Posted on{" "}
+                      <Moment
+                        format="DD MMMM YYYY"
+                        date={articleDetail.publish_date}
+                        locale="id"
+                      />{" "}
+                      by {articleDetail.author.name}
+                    </div>
+                    {/* <a
+            className="badge bg-secondary text-decoration-none link-light"
+            href="#!"
+          >
+            Web Design
+          </a>
+          <a
+            className="badge bg-secondary text-decoration-none link-light"
+            href="#!"
+          >
+            Freebies
+          </a> */}
+                  </header>
+                  <figure className="mb-4 text-center">
+                    <Image
+                      width={900}
+                      height={400}
+                      // layout="fixed"
+                      className="img-fluid rounded"
+                      src={`${IMG}/${articleDetail.cover}`}
+                      // src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
+
+                      alt={articleDetail.title}
+                    />
+                  </figure>
+                  <section className="mb-5 container">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: articleDetail.content,
+                      }}
+                    />
+                  </section>
+                </article>
+              </div>
+
+              {/* <SideWidget /> */}
+            </div>
+          </div>
+        </>
+      )}
       <Footer />
     </>
   );

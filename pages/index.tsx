@@ -1,17 +1,21 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import Navbar from "../components/organisms/Navbar";
 import Header from "../components/organisms/Header";
-import styles from "../styles/Home.module.css";
 import Footer from "../components/organisms/Footer";
 import BlogItem from "../components/molecules/BlogItem";
-import BlogFeatured from "../components/molecules/BlogFeatured";
 import SideWidget from "../components/organisms/SideWidget";
 import { useCallback, useEffect, useState } from "react";
 import { getArticle } from "../services/article";
+import { ArticleTypes } from "../services/data-types";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import Skeleton from "react-loading-skeleton";
 
 const Home: NextPage = () => {
+  const IMG = process.env.NEXT_PUBLIC_IMAGE;
+
+  const { query, isReady } = useRouter();
+
   const [article, setArticle] = useState([]);
   const getArticleList = useCallback(async () => {
     const data = await getArticle();
@@ -24,22 +28,45 @@ const Home: NextPage = () => {
   }, []);
   return (
     <>
+      <Head>
+        <title>Home</title>
+      </Head>
       <Navbar />
       <Header />
 
       <div className="container">
         <div className="row">
           <div className="col-lg-8">
-            {/* <BlogFeatured />
-            <BlogFeatured /> */}
-            {/* {article.map(item => (
-              <BlogItem />
-            ))} */}
-            <BlogItem cover="image/" id={123} metaDescription="asdadsad" publish_date="2021-02-02" key={123} title="asdasd" slug="asdasd-asdad" />
-            <BlogItem cover="image/" id={123} metaDescription="asdadsad" publish_date="2021-02-02" key={123} title="asdasd" slug="asdasd-asdad" />
-            <BlogItem cover="image/" id={123} metaDescription="asdadsad" publish_date="2021-02-02" key={123} title="asdasd" slug="asdasd-asdad" />
+            {!isReady && (
+              <>
+                <Skeleton height={400} />
+                <Skeleton width={200} />
+                <Skeleton width={300} height={25} />
+                <Skeleton width={150} height={40} />
+
+                <Skeleton height={400} />
+                <Skeleton width={200} />
+                <Skeleton width={300} height={25} />
+                <Skeleton width={150} height={40} />
+              </>
+            )}
+            {isReady && (
+              <>
+                {article.map((item: ArticleTypes) => (
+                  <BlogItem
+                    key={item.id}
+                    id={item.id}
+                    cover={item.cover}
+                    metaDescription={item.metaDescription}
+                    publish_date={item.publish_date}
+                    title={item.title}
+                    slug={item.slug}
+                  />
+                ))}
+              </>
+            )}
           </div>
-          <SideWidget />
+          {/* <SideWidget /> */}
         </div>
       </div>
 

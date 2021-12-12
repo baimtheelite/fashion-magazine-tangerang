@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { ArticleTypes } from "../../../services/data-types";
+import Moment from "react-moment";
 
 const IMG = process.env.NEXT_PUBLIC_IMAGE;
 
@@ -20,7 +21,9 @@ export default function BlogItem(props: ArticleTypes) {
         />
       </a>
       <div className="card-body">
-        <div className="small text-muted">{publish_date}</div>
+        <div className="small text-muted">
+          <Moment format="DD MMMM YYYY" locale="id">{publish_date}</Moment>
+        </div>
         <h2 className="card-title h4">{title}</h2>
         <p className="card-text">
           {metaDescription}
