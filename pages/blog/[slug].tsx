@@ -17,7 +17,7 @@ export default function Blog() {
   // const {title, content, cover, publish_date, slug} = props;
   const IMG = process.env.NEXT_PUBLIC_IMAGE;
 
-  const { query, isReady } = useRouter();
+  const { query, isReady, basePath } = useRouter();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,6 +28,8 @@ export default function Blog() {
     cover: "",
     publish_date: "",
     slug: "",
+    meta_keywords: "",
+    meta_description: "",
     author: {
       id: "",
       name: "",
@@ -42,6 +44,7 @@ export default function Blog() {
     setIsLoading(false);
   }, []);
 
+
   useEffect(() => {
     if (isReady) {
       console.log(query.slug);
@@ -54,6 +57,21 @@ export default function Blog() {
     <>
       <Head>
         <title>{isReady ? articleDetail.title : "Artikel Detail"}</title>
+        {/* Meta */}
+        <meta name="description" content={isReady ? articleDetail.title : "Artikel Detail"} />
+        <meta name="keywords" content={isReady ? articleDetail.meta_keywords : "Artikel Detail"} />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={basePath} />
+        <meta property="og:title" content={isReady ? articleDetail.title : "Artikel Detail"} />
+        <meta property="og:description" content={isReady ? articleDetail.meta_description : "Artikel Detail"} />
+        <meta property="og:image" content={isReady ? `${IMG}/${articleDetail.cover}` : ''} />
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={basePath} />
+        <meta property="twitter:title" content={isReady ? articleDetail.title : "Artikel Detail"} />
+        <meta property="twitter:description" content={isReady ? articleDetail.meta_description : "Artikel Detail"} />
+        <meta property="twitter:image" content={isReady ? `${IMG}/${articleDetail.cover}` : ''} />
       </Head>
       <Navbar />
       

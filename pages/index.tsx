@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Fashion Magazine Tangerang</title>
       </Head>
       <Navbar />
       <Header />
