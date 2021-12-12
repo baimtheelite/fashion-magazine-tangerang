@@ -56,22 +56,22 @@ export default function Blog() {
   return (
     <>
       <Head>
-        <title>{isReady ? articleDetail.title : "Artikel Detail"}</title>
+        <title>{isLoading ? articleDetail.title : "Artikel Detail"}</title>
         {/* Meta */}
-        <meta name="description" content={isReady ? articleDetail.title : "Artikel Detail"} />
-        <meta name="keywords" content={isReady ? articleDetail.meta_keywords : "Artikel Detail"} />
+        <meta name="description" content={isLoading ? articleDetail.title : "Artikel Detail"} />
+        <meta name="keywords" content={isLoading ? articleDetail.meta_keywords : "Artikel Detail"} />
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={basePath} />
-        <meta property="og:title" content={isReady ? articleDetail.title : "Artikel Detail"} />
-        <meta property="og:description" content={isReady ? articleDetail.meta_description : "Artikel Detail"} />
-        <meta property="og:image" content={isReady ? `${IMG}/${articleDetail.cover}` : ''} />
+        <meta property="og:title" content={isLoading ? articleDetail.title : "Artikel Detail"} />
+        <meta property="og:description" content={isLoading ? articleDetail.meta_description : "Artikel Detail"} />
+        <meta property="og:image" content={isLoading ? `${IMG}/${articleDetail.cover}` : ''} />
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={basePath} />
-        <meta property="twitter:title" content={isReady ? articleDetail.title : "Artikel Detail"} />
-        <meta property="twitter:description" content={isReady ? articleDetail.meta_description : "Artikel Detail"} />
-        <meta property="twitter:image" content={isReady ? `${IMG}/${articleDetail.cover}` : ''} />
+        <meta property="twitter:title" content={isLoading ? articleDetail.title : "Artikel Detail"} />
+        <meta property="twitter:description" content={isLoading ? articleDetail.meta_description : "Artikel Detail"} />
+        <meta property="twitter:image" content={isLoading ? `${IMG}/${articleDetail.cover}` : ''} />
       </Head>
       <Navbar />
       
