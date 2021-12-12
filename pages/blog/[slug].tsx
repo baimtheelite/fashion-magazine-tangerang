@@ -13,7 +13,10 @@ import { ArticleDetailTypes } from "../../services/data-types";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export default function Blog(props) {
+interface ArticleDetailProps {
+  articleDetail: ArticleDetailTypes;
+}
+export default function Blog(props: ArticleDetailProps) {
   // const {title, content, cover, publish_date, slug} = props;
   const { articleDetail } = props;
   console.log(articleDetail);
