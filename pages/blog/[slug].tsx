@@ -19,6 +19,9 @@ export default function Blog() {
 
   const { query, isReady } = useRouter();
 
+  const [isLoading, setIsLoading] = useState(true);
+
+
   const [articleDetail, setArticleDetail] = useState({
     title: "",
     content: "",
@@ -36,6 +39,7 @@ export default function Blog() {
     console.log(data);
 
     setArticleDetail(data.data);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -53,7 +57,7 @@ export default function Blog() {
       </Head>
       <Navbar />
       
-      {!isReady && (
+      {isLoading && (
         <div className="container">
           <div className="text-center">
             <Skeleton className="my-3" width={500} height={50} />
@@ -64,7 +68,7 @@ export default function Blog() {
         </div>
       )}
 
-      {isReady && (
+      {!isLoading && (
         <>
           <div className="container mt-5">
             <div className="row">
