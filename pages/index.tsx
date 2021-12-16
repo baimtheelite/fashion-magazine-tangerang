@@ -45,7 +45,7 @@ const Home: NextPage = () => {
                   key={item.id}
                   id={item.id}
                   cover={item.cover}
-                  metaDescription={item.metaDescription}
+                  meta_description={item.meta_description}
                   publish_date={item.publish_date}
                   title={item.title}
                   slug={item.slug}

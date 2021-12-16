@@ -7,7 +7,7 @@ import Moment from "react-moment";
 const IMG = process.env.NEXT_PUBLIC_IMAGE;
 
 export default function BlogItem(props: ArticleTypes) {
-  const {title, metaDescription, cover, publish_date, slug} = props;
+  const {title, meta_description, cover, publish_date, slug} = props;
   return (
     <div className="card mb-4">
       <a href="#!">
@@ -26,7 +26,7 @@ export default function BlogItem(props: ArticleTypes) {
         </div>
         <h2 className="card-title h4">{title}</h2>
         <p className="card-text">
-          {metaDescription}
+          {meta_description}
         </p>
         <Link href={`/blog/${slug}`}>
           <a className="btn btn-primary">Read more →</a>

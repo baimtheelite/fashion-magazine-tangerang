@@ -3,14 +3,15 @@ import callAPI from "../config/api";
 
 const ROOT_API = process.env.NEXT_PUBLIC_API;
 
-export async function getArticle() {
+export async function getArticle(data : object = {} ) {
   const url = `${ROOT_API}/article`;
+  console.log(data);
 
   return callAPI({
     url,
     method: "GET",
-    data: {},
-    token: true,
+    params: data,
+    token: false,
   });
 }
 
@@ -21,6 +22,6 @@ export async function getArticleDetail(slug: string) {
     url,
     method: "GET",
     data: {},
-    token: true,
+    token: false,
   });
 }

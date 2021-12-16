@@ -1,6 +1,8 @@
 import '../styles/globals.css'
 import '../styles/styles.css';
 import "react-loading-skeleton/dist/skeleton.css";
+import "../styles/blog-list.css";
+
 
 
 import type { AppProps } from 'next/app'

@@ -2,7 +2,7 @@ export interface ArticleTypes {
     id: number;
     title: string;
     publish_date: string;
-    metaDescription: string;
+    meta_description: string;
     slug: string;
     cover: string;
 }

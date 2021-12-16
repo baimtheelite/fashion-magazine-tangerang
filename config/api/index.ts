@@ -11,6 +11,7 @@ export default async function callAPI({
   method,
   data,
   token,
+  params,
   serverToken,
 }: CallAPIProps) {
   let headers = {
@@ -34,6 +35,7 @@ export default async function callAPI({
     url,
     method,
     data,
+    params,
     headers,
   }).catch((error) => error.response);
   if (response?.status > 300) {

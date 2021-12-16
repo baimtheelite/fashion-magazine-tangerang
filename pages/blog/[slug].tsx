@@ -11,12 +11,11 @@ import SideWidget from "../../components/organisms/SideWidget";
 import { getArticleDetail } from "../../services/article";
 import { ArticleDetailTypes } from "../../services/data-types";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 
 interface ArticleDetailProps {
   articleDetail: ArticleDetailTypes;
 }
-export default function Blog(props: ArticleDetailProps) {
+export default function BlogDetail(props: ArticleDetailProps) {
   // const {title, content, cover, publish_date, slug} = props;
   const { articleDetail } = props;
   console.log(articleDetail);
