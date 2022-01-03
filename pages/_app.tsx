@@ -6,11 +6,13 @@ import "../styles/blog-list.css";
 
 
 import type { AppProps } from 'next/app'
+import NextNProgress from 'nextjs-progressbar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   
   return (
     <>
+        <NextNProgress />
         <Component {...pageProps} />
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
